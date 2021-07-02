@@ -1,14 +1,16 @@
-package com.lizhengpeng.kafka.learn.base;
+package com.lizhengpeng.kafka.learn.step1;
 
 import org.apache.kafka.clients.consumer.*;
-import org.apache.kafka.common.TopicPartition;
 import org.apache.kafka.common.serialization.StringDeserializer;
-import org.apache.kafka.common.serialization.StringSerializer;
 
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.Properties;
 
+/**
+ * kafka消费者基础示例
+ * @author idealist
+ */
 public class KafkaConsumerTest {
     public static void main(String[] args) {
         Properties properties = new Properties();

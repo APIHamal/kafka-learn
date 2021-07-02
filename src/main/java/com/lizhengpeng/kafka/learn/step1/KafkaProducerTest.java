@@ -1,4 +1,4 @@
-package com.lizhengpeng.kafka.learn.base;
+package com.lizhengpeng.kafka.learn.step1;
 
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -10,6 +10,10 @@ import java.util.Properties;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
+/**
+ * kafka生产者示例
+ * @author idealist
+ */
 public class KafkaProducerTest {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         Properties properties = new Properties();
