@@ -55,7 +55,7 @@ public class BaseProducer {
          * 该分区选择器总是会选择主题可用分区中的最后一个分区
          * 例如有5个分区则总是返回下标索引4
          */
-        properties.put(ProducerConfig.PARTITIONER_CLASS_CONFIG,CustomPartitioner.class);
+//        properties.put(ProducerConfig.PARTITIONER_CLASS_CONFIG,CustomPartitioner.class);
         KafkaProducer<String,User> kafkaProducer = new KafkaProducer<String, User>(properties);
         logger.info("发送数据消息....");
         for(int index = 0;index < 100000;index++){
@@ -76,21 +76,14 @@ public class BaseProducer {
      */
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         //发送指定数量的消息到队列中
-        new Thread(()-> {
+        new Thread(() -> {
             try {
                 new BaseProducer().sendMessage("channel_pub_sub");
             } catch (Exception e) {
                 logger.info("消息发送出现异常", e);
             }
         }).start();
-        new Thread(()-> {
-            try {
-                new BaseProducer().sendMessage("channel_pub_sub");
-            } catch (Exception e) {
-                logger.info("消息发送出现异常", e);
-            }
-        }).start();
-        new Thread(()-> {
+        new Thread(() -> {
             try {
                 new BaseProducer().sendMessage("mesg_topic");
             } catch (Exception e) {
