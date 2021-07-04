@@ -1,15 +1,14 @@
 package com.lizhengpeng.kafka.learn.step2;
 
 import org.apache.kafka.clients.consumer.*;
+import org.apache.kafka.common.TopicPartition;
 import org.apache.kafka.common.protocol.types.Field;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.time.Duration;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.Properties;
+import java.util.*;
 
 /**
  * kafka基础消费这演示
@@ -30,13 +29,14 @@ public class BaseConsumer {
          */
         properties.put(ConsumerConfig.GROUP_ID_CONFIG, "user_topic_group");
         KafkaConsumer<String,User> userKafkaConsumer = new KafkaConsumer<String, User>(properties);
-        userKafkaConsumer.subscribe(Collections.singleton("user_topic"));
+        userKafkaConsumer.subscribe(Collections.singleton("channel_pub_sub"));
         logger.info("消费者开始监听KAFKA通道.....");
         while(true){
             ConsumerRecords<String,User> userConsumerRecords = userKafkaConsumer.poll(Duration.ofSeconds(5));
             for(ConsumerRecord<String,User> record : userConsumerRecords){
                 User user = record.value();
                 logger.info("接受到消息->年龄:"+user.getAge()+" 姓名->"+user.getName()+" 性别->"+user.getSex());
+                userKafkaConsumer.commitSync();
             }
         }
     }
